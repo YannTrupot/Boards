@@ -2,7 +2,11 @@
 namespace App\Services\semantic;
 
 use Ajax\php\symfony\JquerySemantic;
+use Ajax\semantic\html\base\constants\Color;
 use Ajax\semantic\html\elements\HtmlLabel;
+use App\Entity\Tag;
+
+
 
 class TagsGui extends JquerySemantic{
     public function dataTable($tags){

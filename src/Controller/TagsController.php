@@ -17,7 +17,7 @@ class TagsController extends Controller{
     public function index(TagsGui $gui,TagRepository $tagRepo){
         $tags=$tagRepo->findAll();
         $dt=$gui->dataTable($tags);
-        return new Response($dt);
+        return $gui->renderView('Tags/index.html.twig');;
     }
     /**
      * @Route("tag/update/{id}", name="tag_update")
@@ -36,6 +36,6 @@ class TagsController extends Controller{
             $tag->setColor($request->get("color"));
             $tagRepo->update($tag);
         }
-        return $this->forward("App\Controller\TagsController::tags");
+        return $this->forward("App\Controller\TagsController::index");
     }
 }
