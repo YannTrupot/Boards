@@ -17,7 +17,7 @@ class TagsController extends Controller{
     public function index(TagsGui $gui,TagRepository $tagRepo){
         $tags=$tagRepo->findAll();
         $dt=$gui->dataTable($tags);
-        return $gui->renderView('Tags/index.html.twig');;
+        return $gui->renderView('Tags/index.html.twig');
     }
     /**
      * @Route("tag/update/{id}", name="tag_update")
