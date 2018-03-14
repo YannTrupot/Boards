@@ -23,7 +23,20 @@ class ProjectsGui extends Gui {
 
     public function getTable($arrayInstance)
     {
-        // TODO: Implement getTable() method.
+        $dt = $this->_semantic->dataTable("dtDevelopers", "App\Entity\Project", $arrayInstance);
+        $dt->setFields(["developer"]);
+        $dt->setCaptions(["Developer"]);
+        $dt->setValueFunction("developer", function($v,$arrayInstance){
+            $lbl=new HtmlLabel("",$arrayInstance->getIdentity());
+            return $lbl;
+        });
+        $dt->addEditButton();
+        $dt->setTargetSelector("#update-developer");
+        $dt->addDeleteButton();
+        $dt->setTargetSelector("#delete-developer");
+        $dt->setIdentifierFunction("getId");
+        $dt->setUrls(["edit"=>"developer/update","delete"=>"developer/delete"]);
+        return $dt;
     }
 
 }

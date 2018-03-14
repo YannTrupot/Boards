@@ -32,7 +32,7 @@ class DevelopersController extends Controller
      */
     public function submit(Request $request,DevelopersRepository $devsrepo){
         $dev=$devsrepo->find($request->get("id"));
-        if(isset($dev)){
+        if(isset($dev)) {
             $dev->setId($request->get("id"));
             $dev->setIdentity($request->get("identity"));
             $devsrepo->update($dev);
@@ -43,8 +43,19 @@ class DevelopersController extends Controller
     /**
      * @Route("developer/add", name="developer_add")
      */
-    public function add(Developer $dev,DevelopersGui $devsGui){
-        $devsGui->getForm($dev);
+    public function add(DevelopersGui $devsGui){
+        $devsGui->getAddForm();
         return $devsGui->renderView('developers/add.html.twig');
+    }
+
+    /**
+     * @Route("developer/delete/{id}", name="developer_delete")
+     */
+    public function delete(Developer $dev, DevelopersRepository $devsrepo){
+        $dev=$devsrepo->find($dev->getId());
+        if(isset($dev)) {
+            $devsrepo->delete($dev->getId());
+        }
+        return $this->forward("App\Controller\DevelopersController::index");
     }
 }
